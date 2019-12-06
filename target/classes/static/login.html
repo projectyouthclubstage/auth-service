@@ -1,0 +1,145 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deeg-Soltions Login</title>
+    <script>
+	function validate() {
+	    var modal = document.getElementById("myModal");
+	    var username = document.getElementById("username").value;
+	    var password = document.getElementById("password").value;
+	    if(document.getElementById("code").value == ""){
+	        if(isOTP(username,password)){
+	            modal.style.display = "block";
+	            return false;
+	        }
+        }
+        modal.style.display = "none";
+        if (document.f.username.value == "" && document.f.password.value == "") {
+            alert(/*[[#{message.username} + #{message.password}]]*/);
+            document.f.username.focus();
+            return false;
+        }
+        if (document.f.username.value == "") {
+            alert(/*[[#{message.username}]]*/);
+            document.f.username.focus();
+            return false;
+        }
+        if (document.f.password.value == "") {
+            alert(/*[[#{message.password}]]*/);
+            document.f.password.focus();
+            return false;
+        }
+    }
+
+
+    function isOTP(user,password){
+       var urlBase = location.href.substring(0, location.href.lastIndexOf("/")+1)
+       var result = false;
+       $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        data: JSON.stringify({"user":user,"password":password}),
+        url: urlBase+"2fa",
+        statusCode: {
+         200: function(responseObject, textStatus, jqXHR) {
+            result = true
+         }
+        },
+        async: false
+        });
+        return result;
+    }
+
+</script>
+    <style type="text/css">
+.wrapper{width:500px;margin-left:auto;margin-right:auto}
+label{padding-left:0 !important}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #272B30;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #32383e;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  max-width: 36rem;
+  border: 1px solid rgba(0,0,0,0.6);
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+</style>
+</head>
+<body>
+
+<div id="error" class="alert alert-danger" style="visibility: hidden;" name="error">Fehler bei der Authentifizierung bitte geben Sie gültige Benutzer/Password ein</div>
+
+<div class="container">
+
+
+        <form name='f' action="login" method='POST' onsubmit="return validate();">
+            <div class="card mx-auto" style="max-width: 36rem; margin-top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title">Login</h5>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                        <!--
+                          <div class="form-group">
+                            <label for="save"><input type="checkbox" checked class="form-check-label" id="active" style="text-align: left"  [(ngModel)]="save" name="save"> Merken</label>
+
+                          </div>
+                        -->
+                        <button class="btn btn-dark" type="submit">Anmelden</button>
+                </div>
+            </div>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal card mx-auto">
+
+                <!-- Modal content -->
+                <div class="modal-content card-body">
+
+                    <div class="form-group">
+                        <label for="code">Google Authenticator Code: </label>
+                        <input type="text" class="form-control" id="code" name="code">
+                    </div>
+
+                    <br/><br/>
+                    <button type="submit" class="btn btn-dark" type="submit">OK</button>
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+
+<script>
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var c = url.searchParams.get("error");
+    if(c != null){
+      document.getElementById('error').style.visibility = "visible";
+    }
+</script>
+</body>
+
+</html>

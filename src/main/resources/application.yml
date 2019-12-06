@@ -4,15 +4,10 @@ server:
       context-path=/auth:
 spring:
   profiles: default
-  data:
-    mongodb:
-      host: localhost
-      #password: example
-      port: 27017
-      repositories:
-        enabled: true
-      #username: root
-      database: auth
+  datasource:
+    url: jdbc:postgresql://auth-server-postgres:5432/postgresdb
+    username: postgresadmin
+    password: admin123
   mvc:
     view:
       prefix: /resources/templates

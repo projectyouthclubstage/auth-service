@@ -1,13 +1,13 @@
 package de.youthclubstage.authserver.repository;
 
 import de.youthclubstage.authserver.entity.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 
 
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends MongoRepository<User, UUID> {
+public interface UserRepository extends CrudRepository<User, UUID> {
     Optional<User> findByEmailAddress(String emailAddress);
 }
 
