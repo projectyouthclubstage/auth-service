@@ -21,14 +21,14 @@ spec:
           image: registry.youthclubstage.de:5000/{NAME}:{VERSION}
           ports:
              - containerPort: {PORT}
-        - env:
-            - name: ADMIN_USER
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-cred
-                  key: admin.user
-            - name: ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: auth-service-cred
-                  key: admin.password
+#        - env:
+#            - name: ADMIN_USER
+#              valueFrom:
+#                secretKeyRef:
+#                  name: auth-service-cred
+#                  key: admin.user
+#            - name: ADMIN_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: auth-service-cred
+#                  key: admin.password
