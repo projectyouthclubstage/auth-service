@@ -27,9 +27,6 @@ import java.util.UUID;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid",
-            strategy = "uuid")
     private UUID id;
 
     private String emailAddress;
