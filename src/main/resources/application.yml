@@ -33,7 +33,7 @@ cors:
     - Content-Type
 logging:
   level:
-    org.springframework.security: DEBUG
+    org.springframework.security: WARN
 init:
   admin: ${ADMIN_USER:demo}
   password: ${ADMIN_PASSWORD:demo}
