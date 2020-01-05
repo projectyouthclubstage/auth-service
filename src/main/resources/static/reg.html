@@ -1,0 +1,190 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deeg-Soltions Registration</title>
+    <script>
+	function sendJson() {
+	 var from = document.getElementById("regexpForm");
+    	var email = document.getElementById("email").value;
+    	var firstName = document.getElementById("firstName").value;
+    	var lastName = document.getElementById("lastName").value;
+    	var password = document.getElementById("password").value;
+    	var captcha = document.getElementById("recaptchaResponse").value;
+    	send(email,firstName,lastName,password,captcha)
+      return false;
+    }
+
+    function send(email,firstName,lastName,password,captcha){
+       var urlBase = location.href.substring(0, location.href.lastIndexOf("/")+1)
+       var result = false;
+       $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        data: JSON.stringify(
+        {
+          "email":email,
+          "firstName":firstName,
+          "lastName":lastName,
+          "password":password,
+          "captcha":captcha
+        }),
+        url: urlBase+"registration",
+        statusCode: {
+         200: function(responseObject, textStatus, jqXHR) {
+         	var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+         }
+        },
+        async: true
+        });
+    }
+
+</script>
+    <style type="text/css">
+.wrapper{width:500px;margin-left:auto;margin-right:auto}
+label{padding-left:0 !important}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #272B30;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #32383e;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  max-width: 36rem;
+  border: 1px solid rgba(0,0,0,0.6);
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+</style>
+</head>
+<body>
+
+<div id="error" class="alert alert-danger" style="visibility: hidden;" name="error">Fehler bei der Authentifizierung bitte geben Sie gültige Benutzer/Password ein</div>
+
+<div class="container">
+
+
+    <form name='reg'  class="needs-validation" novalidate id="regexpForm" oninput='passwordconfirmation.setCustomValidity(passwordconfirmation.value != password.value ? "Passwords do not match." : "")'>
+        <div class="card mx-auto" style="max-width: 36rem; margin-top: 20px;">
+            <div class="card-body">
+                <h5 class="card-title">Registration</h5>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="example@example.de" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Vorname:</label>
+                    <input type="text" class="form-control" id="firstName" pattern="^[A-Za-z\s]{1,254}$" name="firstName" placeholder="Max" required>
+                    <div class="invalid-feedback">
+                        Der Vorname ist ungueltig.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Nachname:</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" pattern="^[A-Za-z\s]{1,254}$"  placeholder="Mustermann" required>
+                    <div class="invalid-feedback">
+                        Der Nachname ist ungueltig.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" pattern="^[A-Za-z0-9\*#$§!&?\s]{8,254}$"  required>
+                    <div class="invalid-feedback">
+                        Das Password muss mindestens aus 8 Zeichen bestehen. Es sind die folgenden Sonderzeichen zulässig *#$§!&?.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordconfirmation">Password Best&aumltigung:</label>
+                    <input type="password" class="form-control" id="passwordconfirmation" name="passwordconfirmation" required>
+                    <div class="invalid-feedback">
+                        Das Password stimmt nicht Ueberein.
+                    </div>
+                </div>
+                <input type="hidden" name="recaptchaResponse" id="recaptchaResponse">
+                <button class="btn btn-dark" type="submit">Registrieren</button>
+            </div>
+        </div>
+    </form>
+    <div id="myModal" class="modal card mx-auto">
+
+        <!-- Modal content -->
+        <div class="modal-content card-body">
+            <p>Die Registierung ist fast abgeschlossen. Wir haben eine Email zur Kontoaktivierung an ihre Email Adresse versendet.
+                Sobald Sie mit dem Aktivierungs-Link die aktivierung abgeschlossen haben k&ouml;nnen sie den Account nutzen.</p>
+            <br><br>
+            <a href="login.html">Zur&uuml;ck zur Login-Seite</a>
+        </div>
+
+    </div>
+</div>
+<footer class="page-footer font-small blue">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        <a href="impressum.html">Impressum</a> &nbsp;&nbsp;&nbsp;<a href="datenschutz.html">Datenschutz</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+
+<script src="https://www.google.com/recaptcha/api.js?render=6LergcwUAAAAAGb7SwkIJzhiQRfAsXwKSebkTMdt"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6LergcwUAAAAAGb7SwkIJzhiQRfAsXwKSebkTMdt', {action: 'homepage'}).then(function(token) {
+       var recaptchaResponse = document.getElementById('recaptchaResponse');
+       recaptchaResponse.value = token;
+    });
+});
+</script>
+<script>
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var c = url.searchParams.get("error");
+    if(c != null){
+      document.getElementById('error').style.visibility = "visible";
+      document.getElementById('error').innerHTML = c;
+    }
+
+    (function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+
+        }else{
+          sendJson();
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
+
+
+
+
+</script>
+</body>
+
+</html>

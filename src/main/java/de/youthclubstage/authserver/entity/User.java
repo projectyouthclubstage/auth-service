@@ -14,10 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,17 +31,21 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String password;
-
     private boolean is2fa;
     private String secret;
+    private boolean enabled;
+    private String emailKey;
+    private Boolean isAdmin;
+
+    private Calendar createDate;
 
 
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        GrantedAuthority gr = new SimpleGrantedAuthority("user");
         List<GrantedAuthority> result = new ArrayList<>();
-        result.add(gr);
+        result.add(new SimpleGrantedAuthority("user"));
+        result.add(new SimpleGrantedAuthority("admin"));
         return result;
     }
 
@@ -87,6 +88,6 @@ public class User implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

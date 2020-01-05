@@ -42,7 +42,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().requestMatchers()
-                .antMatchers("/actuator**","2fa","/login","/login.html", "/oauth/authorize", "/static/login.html")
+                .antMatchers("/actuator**","/2fa","/login","/login.html", "/oauth/authorize")
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()

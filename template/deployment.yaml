@@ -21,14 +21,29 @@ spec:
           image: registry.youthclubstage.de:5000/{NAME}:{VERSION}
           ports:
              - containerPort: {PORT}
-#        - env:
-#            - name: ADMIN_USER
-#              valueFrom:
-#                secretKeyRef:
-#                  name: auth-service-cred
-#                  key: admin.user
-#            - name: ADMIN_PASSWORD
-#              valueFrom:
-#                secretKeyRef:
-#                  name: auth-service-cred
-#                  key: admin.password
+        - env:
+            - name: MAIL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mail-secret
+                  key: host
+            - name: MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mail-secret
+                  key: password
+            - name: MAIL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mail-secret
+                  key: username
+            - name: MAIL_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: mail-secret
+                  key: port
+            - name: GOOGLE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: google-secret
+                  key: secret

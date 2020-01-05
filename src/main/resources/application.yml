@@ -4,15 +4,33 @@ server:
       context-path=/auth:
 spring:
   profiles: default
-  datasource:
-    url: jdbc:postgresql://auth-server-postgres:5432/postgresdb
-    username: postgresadmin
-    password: admin123
+  mail:
+    default-encoding: UTF-8
+    host: ${MAIL_HOST}
+    username: ${MAIL_USER}
+    password: ${MAIL_PASSWORD}
+    port: ${MAIL_PORT:587}
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: ${MAIL_HOST}
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
 #  datasource:
-#    url: jdbc:h2:mem:testdb
-#    driverClassName: org.h2.Driver
-#    username: sa
-#    password:
+#    url: jdbc:postgresql://auth-server-postgres:5432/postgresdb
+#    username: postgresadmin
+#    password: admin123
+  #test3@deeg-solutions.de
+  #iaej0u6c
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
   mvc:
@@ -37,3 +55,5 @@ logging:
 init:
   admin: ${ADMIN_USER:demo}
   password: ${ADMIN_PASSWORD:demo}
+google:
+  secret: ${GOOGLE_SECRET:SECRET}

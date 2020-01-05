@@ -98,7 +98,7 @@ label{padding-left:0 !important}
                             <input type="text" class="form-control" id="username" name="username">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password:</label>
+                            <label for="password" style="float:left;">Password:</label> <a href="reg.html"><div style="text-align:right;float:right">Password vergessen?</div></a>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <!--
@@ -108,6 +108,11 @@ label{padding-left:0 !important}
                           </div>
                         -->
                         <button class="btn btn-dark" type="submit">Anmelden</button>
+                    <div class="border-top my-3">
+                        <br/>
+                        <a href="reg.html">Neu hier? Hier registrieren</a>
+                    </div>
+
                 </div>
             </div>
 
@@ -130,8 +135,17 @@ label{padding-left:0 !important}
 
 
         </form>
-    </div>
 
+    </div>
+<footer class="page-footer font-small blue">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        <a href="impressum.html">Impressum</a> &nbsp;&nbsp;&nbsp;<a href="datenschutz.html">Datenschutz</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
 <script>
     var url_string = window.location.href
     var url = new URL(url_string);

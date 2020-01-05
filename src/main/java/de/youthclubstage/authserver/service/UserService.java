@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Calendar;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -73,7 +74,7 @@ public class UserService implements UserDetailsService {
     @PostConstruct
     private void init(){
         if (userRepository.count() == 0 ) {
-            User user = new User(null,admin,"Sascha","Deeg","",true,password);
+            User user = new User(null,admin,"Sascha","Deeg","",true,password,true,"",true, Calendar.getInstance());
             user.setId(UUID.randomUUID());
             user.setPassword(encoder.encode(password));
             userRepository.save(user);
