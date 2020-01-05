@@ -129,7 +129,7 @@ public class RegistrationService {
         helper.setFrom("test3@deeg-solutions.de");
         helper.setSubject("Registration abschließen");
         helper.setText(java.text.MessageFormat.format(template,
-                "http://localhost:8080/regconfirm?email="+user.getEmailAddress()+"&key="+user.getEmailKey(),
+                "https://api.youthclubstage.de/auth/regconfirm?email="+user.getEmailAddress()+"&key="+user.getEmailKey(),
                 "YouthLClubStage",
                 "Das Team"),
                 true);
