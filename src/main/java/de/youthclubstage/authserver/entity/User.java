@@ -20,7 +20,7 @@ import java.util.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table
+@Table(name = "AuthUser")
 public class User implements UserDetails {
 
     @Id
