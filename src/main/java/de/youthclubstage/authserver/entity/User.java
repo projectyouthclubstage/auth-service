@@ -24,7 +24,8 @@ import java.util.*;
 public class User implements UserDetails {
 
     @Id
-    private UUID id;
+    @GeneratedValue
+    private Long id;
 
     private String emailAddress;
 

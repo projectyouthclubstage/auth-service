@@ -58,13 +58,6 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void addUser(User user, String password){
-        if(user.getId() == null)
-            user.setId(UUID.randomUUID());
-        user.setPassword(encoder.encode(password));
-        userRepository.save(user);
-    }
-
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -75,7 +68,6 @@ public class UserService implements UserDetailsService {
     private void init(){
         if (userRepository.count() == 0 ) {
             User user = new User(null,admin,"Sascha","Deeg","",true,password,true,"",true, Calendar.getInstance());
-            user.setId(UUID.randomUUID());
             user.setPassword(encoder.encode(password));
             userRepository.save(user);
         }

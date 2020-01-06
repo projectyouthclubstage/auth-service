@@ -99,7 +99,7 @@ public class RegistrationService {
         }
         User newUser = null;
         try {
-            newUser = new User(UUID.randomUUID(),
+            newUser = new User(null,
                     registration.getEmail(),
                     registration.getFirstName(),
                     registration.getLastName(),
