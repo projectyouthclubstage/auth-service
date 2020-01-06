@@ -20,12 +20,12 @@ spring:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
     username: sa
-    password:
+    password: sa
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
 init:
   admin: demo
-  password: demo
+  password: demo1
 google:
   secret: secret
 registration:
