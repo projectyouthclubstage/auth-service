@@ -8,7 +8,7 @@ server:
     password: ${MAIL_PASSWORD}
     port: ${MAIL_PORT:587}
     address: ${MAIL_ADDRESS}
-    properties: org.hibernate.dialect.PostgreSQLDialect
+    properties:
       mail:
         smtp:
           ssl:
