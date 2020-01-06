@@ -67,7 +67,7 @@ public class UserService implements UserDetailsService {
     @PostConstruct
     private void init(){
         if (userRepository.count() == 0 ) {
-            User user = new User(null,admin,"Sascha","Deeg","",true,password,true,"",true, Calendar.getInstance());
+            User user = new User(UUID.randomUUID(),admin,"Sascha","Deeg","",true,password,true,"",true, Calendar.getInstance());
             user.setPassword(encoder.encode(password));
             userRepository.save(user);
         }
