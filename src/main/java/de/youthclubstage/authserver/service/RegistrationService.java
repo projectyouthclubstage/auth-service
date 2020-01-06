@@ -32,6 +32,7 @@ public class RegistrationService {
     private final String googleSecret;
     private final String url;
     private final PasswordEncoder passwordEncoder;
+    private final String sender;
 
     private final String template = "<html>\n" +
             "\n" +
@@ -71,11 +72,13 @@ public class RegistrationService {
                                 UserRepository userRepository,
                                 GoogleValidation googleValidation,
                                 @Value("${google.secret}") String googleSecret,
-                                @Value("${registration.url}") String url){
+                                @Value("${registration.url}") String url,
+                                @Value("${spring.mail.address}") String sender){
         this.googleValidation = googleValidation;
         this.javaMailSender = javaMailSender;
         this.userRepository = userRepository;
         this.googleSecret = googleSecret;
+        this.sender = sender;
         this.url = url;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
@@ -129,7 +132,7 @@ public class RegistrationService {
         MimeMessage mail = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail, true);
         helper.setTo(user.getEmailAddress());
-        helper.setFrom("test3@deeg-solutions.de");
+        helper.setFrom(sender);
         helper.setSubject("Registration abschließen");
         helper.setText(java.text.MessageFormat.format(template,
                 url+"regconfirm?email="+user.getEmailAddress()+"&key="+user.getEmailKey(),

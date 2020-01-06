@@ -25,25 +25,55 @@ spec:
             - name: MAIL_HOST
               valueFrom:
                 secretKeyRef:
-                  name: mail-secret
-                  key: host
+                  name: yc-auth-service-secret
+                  key: mail.host
             - name: MAIL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mail-secret
-                  key: password
+                  name: yc-auth-service-secret
+                  key: mail.password
             - name: MAIL_USER
               valueFrom:
                 secretKeyRef:
-                  name: mail-secret
-                  key: username
+                  name: yc-auth-service-secret
+                  key: mail.username
             - name: MAIL_PORT
               valueFrom:
                 secretKeyRef:
-                  name: mail-secret
-                  key: port
+                  name: yc-auth-service-secret
+                  key: mail.port
+            - name: MAIL_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: yc-auth-service-secret
+                  key: mail.address
             - name: GOOGLE_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: google-secret
-                  key: secret
+                  name: yc-auth-service-secret
+                  key: google.secret
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: yc-auth-service-secret
+                  key: db.url
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: yc-auth-service-secret
+                  key: db.user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: yc-auth-service-secret
+                  key: db.password
+            - name: ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: yc-auth-service-secret
+                  key: admin.user
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: yc-auth-service-secret
+                  key: admin.password

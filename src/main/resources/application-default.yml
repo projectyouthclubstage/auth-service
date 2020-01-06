@@ -1,0 +1,32 @@
+spring:
+  mail:
+    default-encoding: UTF-8
+    host: localhost
+    username: sa
+    password: sa
+    address: test@test.de
+    port: 587
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: localhost
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+init:
+  admin: demo
+  password: demo
+google:
+  secret: secret
+registration:
+  url: http://localhost:8080

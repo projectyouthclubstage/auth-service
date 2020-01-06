@@ -1,0 +1,32 @@
+server:
+  servlet:
+    context-path=/auth:
+spring:
+  mail:
+    default-encoding: UTF-8
+    host: ${MAIL_HOST}
+    username: ${MAIL_USER}
+    password: ${MAIL_PASSWORD}
+    port: ${MAIL_PORT:587}
+    address: ${MAIL_ADDRESS}
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: ${MAIL_HOST}
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+init:
+  admin: ${ADMIN_USER}
+  password: ${ADMIN_PASSWORD}
+google:
+  secret: ${GOOGLE_SECRET}
+registration:
+  url: https://api.dev.youthclubstage.de/auth/
