@@ -1,10 +1,6 @@
 server:
   servlet:
     context-path=/auth:
-spring:
-  jpa:
-    hibernate:
-      ddl-auto=update:
   mail:
     default-encoding: UTF-8
     host: ${MAIL_HOST}
@@ -12,7 +8,7 @@ spring:
     password: ${MAIL_PASSWORD}
     port: ${MAIL_PORT:587}
     address: ${MAIL_ADDRESS}
-    properties:
+    properties: org.hibernate.dialect.PostgreSQLDialect
       mail:
         smtp:
           ssl:
@@ -26,6 +22,11 @@ spring:
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
+    jpa:
+     hibernate:
+      generate-ddl=true:
+      ddl-auto=update:
+      database-platform: org.hibernate.dialect.H2Dialect
 init:
   admin: ${ADMIN_USER}
   password: ${ADMIN_PASSWORD}
