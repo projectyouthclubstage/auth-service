@@ -21,7 +21,7 @@ spec:
           image: registry.youthclubstage.de:5000/{NAME}:{VERSION}
           ports:
              - containerPort: {PORT}
-        - env:
+          env:
             - name: MAIL_HOST
               valueFrom:
                 secretKeyRef:
