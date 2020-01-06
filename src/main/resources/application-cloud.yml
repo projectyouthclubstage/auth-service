@@ -1,6 +1,7 @@
 server:
   servlet:
     context-path=/auth:
+spring:
   mail:
     default-encoding: UTF-8
     host: ${MAIL_HOST}
