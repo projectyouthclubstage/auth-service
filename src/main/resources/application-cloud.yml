@@ -22,11 +22,11 @@ server:
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
-    jpa:
-     hibernate:
-      generate-ddl=true:
-      ddl-auto=update:
-      database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
 init:
   admin: ${ADMIN_USER}
   password: ${ADMIN_PASSWORD}
