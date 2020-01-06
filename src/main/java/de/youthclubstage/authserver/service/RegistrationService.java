@@ -30,6 +30,7 @@ public class RegistrationService {
     private final UserRepository userRepository;
     private final GoogleValidation googleValidation;
     private final String googleSecret;
+    private final String url;
     private final PasswordEncoder passwordEncoder;
 
     private final String template = "<html>\n" +
@@ -69,11 +70,13 @@ public class RegistrationService {
     public  RegistrationService(JavaMailSender javaMailSender,
                                 UserRepository userRepository,
                                 GoogleValidation googleValidation,
-                                @Value("${google.secret}") String googleSecret){
+                                @Value("${google.secret}") String googleSecret,
+                                @Value("${registration.url}") String url){
         this.googleValidation = googleValidation;
         this.javaMailSender = javaMailSender;
         this.userRepository = userRepository;
         this.googleSecret = googleSecret;
+        this.url = url;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -129,12 +132,11 @@ public class RegistrationService {
         helper.setFrom("test3@deeg-solutions.de");
         helper.setSubject("Registration abschließen");
         helper.setText(java.text.MessageFormat.format(template,
-                "https://api.youthclubstage.de/auth/regconfirm?email="+user.getEmailAddress()+"&key="+user.getEmailKey(),
-                "YouthLClubStage",
+                url+"regconfirm?email="+user.getEmailAddress()+"&key="+user.getEmailKey(),
+                "YouthClubStage",
                 "Das Team"),
                 true);
         javaMailSender.send(mail);
-
         log.info("Send email '{}' to: {}", "Registration abschließen", user.getEmailAddress());
     }
 

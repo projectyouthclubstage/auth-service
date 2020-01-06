@@ -57,3 +57,5 @@ init:
   password: ${ADMIN_PASSWORD:demo}
 google:
   secret: ${GOOGLE_SECRET:SECRET}
+registration:
+  url: https://api.dev.youthclubstage.de/auth/
